@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diabetes Prediction via Tongue Image</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .container {
+      max-width: 550px;
+      margin: 3rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #008080;
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.4rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #008080;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #006666;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .result {
+      margin-top: 2rem;
+      text-align: center;
+      font-weight: bold;
+      color: green;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Form -->
+  <div class="container" id="login-section">
+    <h2>Login</h2>
+    <form onsubmit="return handleLogin(event)">
+      <label for="username">Username</label>
+      <input type="text" id="username" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" required />
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <!-- Patient Info + Upload Form -->
+  <div class="container hidden" id="patient-section">
+    <h2>Patient Details & Prediction</h2>
+    <form id="prediction-form" onsubmit="return handlePrediction(event)">
+      <label for="pname">Patient Name</label>
+      <input type="text" id="pname" name="pname" required />
+
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" min="0" required />
+
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender" required>
+        <option value="">Select...</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+
+      <label for="image">Upload Tongue Image</label>
+      <input type="file" id="image" name="image" accept="image/*" required />
+
+      <button type="submit">Proceed to Prediction</button>
+    </form>
+    <div class="result" id="result-text"></div>
+  </div>
+
+  <footer>
+    &copy; 2025 TongueScan AI | Early Diabetes Prediction
+  </footer>
+
+  <script>
+    function handleLogin(event) {
+      event.preventDefault();
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+
+      // Dummy login check — replace with real API later
+      if (user === "admin" && pass === "1234") {
+        document.getElementById("login-section").classList.add("hidden");
+        document.getElementById("patient-section").classList.remove("hidden");
+      } else {
+        alert("Invalid login. Try username: admin | password: 1234");
+      }
+    }
+
+    function handlePrediction(event) {
+      event.preventDefault();
+
+      // Dummy prediction logic (simulate backend response)
+      const name = document.getElementById("pname").value;
+      const resultBox = document.getElementById("result-text");
+
+      resultBox.style.color = "#007a33";
+      resultBox.textContent = `Prediction complete for ${name}: Likelihood of diabetes is LOW.`;
+
+      // You can replace this section to submit data to Flask or Django API
+      // using fetch() or form submission logic
+    }
+  </script>
+
+</body>
+</html>

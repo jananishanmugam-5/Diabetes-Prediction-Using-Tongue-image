@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login & Patient Info - Diabetes Prediction</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 3rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #008080;
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #008080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #006666;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      background-color: #e0e0e0;
+    }
+
+    #patient-form {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN FORM -->
+  <div class="container" id="login-form">
+    <h2>Login</h2>
+    <form onsubmit="return loginUser(event)">
+      <label for="username">Username</label>
+      <input type="text" id="username" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" required />
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <!-- PATIENT DETAILS FORM -->
+  <div class="container" id="patient-form">
+    <h2>Patient Information</h2>
+    <form action="/predict" method="POST" enctype="multipart/form-data">
+      <label for="name">Patient Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" min="0" required />
+
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender" required>
+        <option value="">Select...</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="image">Upload Tongue Image</label>
+      <input type="file" id="image" name="image" accept="image/*" required />
+
+      <button type="submit">Submit for Prediction</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2025 TongueScan AI | Diabetes Prediction Tool
+  </footer>
+
+  <!-- Basic Login Logic -->
+  <script>
+    function loginUser(event) {
+      event.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // Dummy login check (replace with real logic in backend)
+      if (username === "admin" && password === "1234") {
+        document.getElementById("login-form").style.display = "none";
+        document.getElementById("patient-form").style.display = "block";
+      } else {
+        alert("Invalid credentials. Try admin / 1234 for demo.");
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>
